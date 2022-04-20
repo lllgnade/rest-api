@@ -1,0 +1,11 @@
+spring:
+  # database
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mariadb://192.168.1.20:3307/TestDB?characterEncoding=utf8&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&useSSL=false
+    username: tester
+    password: Tester123!@#
+
+mybatis:
+  # 마이바티스 vo 패키지 위치 설정
+  type-aliases-package: com.api.rest.vo
