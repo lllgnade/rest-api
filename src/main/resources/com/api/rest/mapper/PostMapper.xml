@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.api.rest.mapper.PostMapper">
+
+    <insert id="create">
+        insert into Post
+        values (
+        #{userId},
+        #{id},
+        #{title},
+        #{body}
+        )
+    </insert>
+
+    <select id="selectAll" resultType="PostVo">
+        select *
+        from Post
+    </select>
+
+    <select id="selectById" resultType="PostVo">
+        select *
+        from Post
+        where id = #{id}
+    </select>
+
+    <update id="update">
+        update Post
+        <set>
+            <if test="userId != null">userId = #{userId},</if>
+            <if test="title != null">title = #{title},</if>
+            <if test="body != null">body = #{body}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from Post
+        where id = #{id}
+    </delete>
+
+</mapper>

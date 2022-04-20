@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PostResDto {
+public class PostListResDto {
     private Integer errorCode = null;
-    private PostVo post;
+    private List<PostVo> postList;
 }
