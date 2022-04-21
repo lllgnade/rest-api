@@ -12,7 +12,7 @@ public interface PostMapper {
 
     List<PostVo> selectAll();
 
-    List<PostVo> selectByQuery(PostVo postVo);
+    List<PostVo> selectByQuery(PostVo postFilter);
 
     PostVo selectById(int id);
 
@@ -20,5 +20,4 @@ public interface PostMapper {
 
     int delete(int id);
 
-    //selectByUserEmail 등
 }

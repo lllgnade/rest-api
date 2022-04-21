@@ -22,8 +22,17 @@ public class PostController {
     @Autowired
     PostService postService;
 
+    /**
+     * 쿼리스트링 조건에 맞는 Post를 불러온다.
+     * 어떤 쿼리스트링도 입력하지 않으면 모든 Post를 불러온다.
+     *
+     * @param userId 해당 userId를 가진 Post
+     * @param title 해당 내용을 title에 포함하고 있는 Post
+     * @param body  해당 내용을 body에 포함하고 있는 Post
+     * @return PostList 와 ResultCode 를 포함한 Dto. 에러가 없을 시에는 리스트만 반환한다.
+     */
     @GetMapping("/post")
-    public PostListResDto selectByQuery(@RequestParam(required = false) Integer userId,
+    public PostListResDto selectWithQuery(@RequestParam(required = false) Integer userId,
                                            @RequestParam(required = false) String title,
                                            @RequestParam(required = false) String body) {
 
