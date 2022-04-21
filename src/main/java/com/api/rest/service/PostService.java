@@ -27,6 +27,10 @@ public class PostService {
         return postMapper.selectById(id);
     }
 
+    public List<PostVo> selectByQuery(PostVo postVo){
+        return postMapper.selectByQuery(postVo);
+    }
+
     public int update(PostVo postVo){
         return postMapper.update(postVo);
     }

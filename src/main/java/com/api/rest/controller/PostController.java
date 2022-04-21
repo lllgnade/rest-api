@@ -23,11 +23,24 @@ public class PostController {
     PostService postService;
 
     @GetMapping("/post")
-    public PostListResDto selectAll() {
+    public PostListResDto selectByQuery(@RequestParam(required = false) Integer userId,
+                                           @RequestParam(required = false) String title,
+                                           @RequestParam(required = false) String body) {
+
         PostListResDto postListResDto = new PostListResDto();
         List<PostVo> postList = null;
+
+        // vo를 생성해 검색 필터로 사용
+        PostVo postFilter = new PostVo();
+        if(userId != null)
+            postFilter.setUserId(userId); //int는 null이 될 수 없으므로 파라미터를 Integer 로 받아줌
+        if(title != null)
+            postFilter.setTitle(title);
+        if(body != null)
+            postFilter.setBody(body);
+
         try {
-            postList = postService.selectAll();
+            postList = postService.selectByQuery(postFilter);
         } catch (DataAccessException e) {
             log.error("Exception Occurred.", e);
             postListResDto.setResultCode(ResultCode.UNKNOWN_DATABASE_ERROR);
@@ -59,6 +72,7 @@ public class PostController {
         postResDto.setPost(postVo);
         return postResDto;
     }
+
 
     @PostMapping("/post")
     public PostResDto create(@RequestBody PostReqDto postReqDto) {

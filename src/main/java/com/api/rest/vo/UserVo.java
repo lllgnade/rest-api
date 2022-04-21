@@ -7,7 +7,7 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_NULL)       // 값이 비어있는 필드는 제외하고 JSON 매핑
 // responseDto엔 붙여주는 게 좋다.
 public class UserVo {
-    private int id;
+    private Integer id;
     private String name;
     private String username;
     private String email;

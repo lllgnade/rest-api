@@ -12,11 +12,13 @@ public interface PostMapper {
 
     List<PostVo> selectAll();
 
+    List<PostVo> selectByQuery(PostVo postVo);
+
     PostVo selectById(int id);
 
     int update(PostVo postVo);
 
     int delete(int id);
 
-    //selectByUserId, ByTitle 등
+    //selectByUserEmail 등
 }

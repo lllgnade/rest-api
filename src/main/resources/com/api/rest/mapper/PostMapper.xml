@@ -18,6 +18,16 @@
         from Post
     </select>
 
+    <select id="selectByQuery" resultType="PostVo">
+        select *
+        from Post
+        <where>
+            <if test="userId != null">userId = #{userId}</if>
+            <if test="title != null">and title like CONCAT('%',#{title},'%')</if>
+            <if test="body != null">and body like CONCAT('%',#{body},'%')</if>
+        </where>
+    </select>
+
     <select id="selectById" resultType="PostVo">
         select *
         from Post
