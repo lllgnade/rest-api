@@ -9,6 +9,6 @@ import java.util.List;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PostListResDto {
-    private Integer errorCode = null;
+    private ResultCode resultCode = null;
     private List<PostVo> postList;
 }
