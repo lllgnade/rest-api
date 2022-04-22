@@ -15,27 +15,27 @@ public class PostService {
     @Autowired
     PostMapper postMapper;
 
-    public int create(PostVo postVo){
-        return postMapper.create(postVo);
+    public void create(PostVo postVo) {
+        postMapper.create(postVo);
     }
 
-    public List<PostVo> selectAll(){
+    public List<PostVo> selectAll() {
         return postMapper.selectAll();
     }
 
-    public PostVo selectById(int id){
+    public PostVo selectById(int id) {
         return postMapper.selectById(id);
     }
 
-    public List<PostVo> selectByQuery(PostVo postVo){
+    public List<PostVo> selectByQuery(PostVo postVo) {
         return postMapper.selectByQuery(postVo);
     }
 
-    public int update(PostVo postVo){
+    public int update(PostVo postVo) {
         return postMapper.update(postVo);
     }
 
-    public int delete(int id){
+    public int delete(int id) {
         return postMapper.delete(id);
     }
 }

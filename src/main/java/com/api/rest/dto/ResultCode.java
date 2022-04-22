@@ -28,6 +28,7 @@ public enum ResultCode {
     UNKNOWN_ERROR(-99);
 
     private final int value;
+
     ResultCode(int value) {
         this.value = value;
     }
@@ -35,5 +36,4 @@ public enum ResultCode {
     public int value() {
         return this.value;
     }
-
 }

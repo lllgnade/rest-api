@@ -3,31 +3,37 @@
 <!-- 60초마다 설정 파일의 변경을 확인 하여 변경시 갱신 -->
 <configuration scan="true" scanPeriod="60 seconds">
 
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>./logs/info.log</file> <!-- 파일을 저장할 경로를 정한다 -->
+    <property name="LOG_DIR" value="log/"/>
+    <property name="LOG_NAME" value="restapi"/>
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%12t] %40logger{40} : %msg%n"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>[%d{yyyy-MM-dd HH:mm:ss:SSS}][%thread] %C.%M:%line [%level] %m%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) [%12t] %40logger{40} : %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!--<pattern>[%d{HH:mm:ss.SSS}] %green([%thread]) %c.%M:%line  </pattern>-->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/${LOG_NAME}.log</file> <!-- 파일을 저장할 경로를 정한다 -->
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>./logs/history/info.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern> <!-- 파일 쓰기가 종료된 log 파일명 설정 및 .gz로 압축 -->
+            <fileNamePattern>${LOG_DIR}/%d{yyyy-MM, aux}/${LOG_NAME}-%d{yyyy-MM-dd}%i.log</fileNamePattern> <!--%i 필수-->
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>100MB</maxFileSize> <!-- 한 파일의 최대 용량 -->
+                <maxFileSize>1GB</maxFileSize> <!-- 한 파일의 최대 용량 (거의 안 씀) -->
             </timeBasedFileNamingAndTriggeringPolicy>
-            <maxHistory>180</maxHistory> <!-- 한 파일의 최대 저장 기한 -->
+            <maxHistory>365</maxHistory> <!-- 한 파일의 최대 저장 기한 -->
         </rollingPolicy>
     </appender>
 
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
-            <!-- [2018-06-25] [15:10:24.305] [스레드] [클래스명.메소드명:라인] [로그 레벨] [message] -->
-            <pattern>[%d{HH:mm:ss.SSS}] %green([%thread]) %c.%M:%line %highlight([%level]) %m%n</pattern>
-        </layout>
-    </appender>
 
-
+    <!--특정 로거 설정-->
     <logger name="com.api.rest.mapper.PostMapper" level="DEBUG">
         <appender-ref ref="STDOUT"/>
     </logger>
+
+    <!--루트 로거 설정-->
     <root>
         <level value="INFO"/>
         <appender-ref ref="STDOUT"/>
